@@ -1,0 +1,29 @@
+.setting-form {
+    ion-item {
+        border-bottom: 1px solid #6d6d6d;
+        margin-bottom: 15px;
+        --padding-start: 0px;
+        .custom-dropdown {
+            width: 100%;
+        }
+        .label {
+            ion-text {
+                color: #6d6d6d;
+                font-size: 12px;
+
+            }
+        }
+        .value {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            ion-text {
+                margin: 10px 0px;
+                font-size: 14px;
+            }
+            ion-icon {
+                font-size: 25px;
+            }
+        }
+    }
+}

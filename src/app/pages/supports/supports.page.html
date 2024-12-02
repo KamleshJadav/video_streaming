@@ -1,0 +1,56 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md" color="black">
+    <ion-buttons class="back-icon" slot="start">
+      <ion-icon color="white" name="arrow-back" (click)="goBack()"></ion-icon>
+    </ion-buttons>
+    <ion-title class="header-title">Supports</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content color="grey">
+  <div>
+    <img src="assets/images/contact-us.png" alt="">
+  </div>
+  <div class="ion-padding">
+    <div class="title">
+      <h5> We're Happy to Hear From You</h5>
+    </div>
+    <div class="details">
+      <div>
+        <ion-icon class="ion-margin-end" name="call-outline"></ion-icon>
+        <span>{{helper.contactDetails.phone_number}}</span>
+      </div>
+      <div>
+        <ion-icon class="ion-margin-end" name="mail-outline"></ion-icon>
+        <span>{{helper.contactDetails.email}}</span>
+      </div>
+    </div>
+
+    <div class="title  ">
+      <h5> Or Send Your Message</h5>
+    </div>
+
+    <div class="profile-form">
+
+      <ion-item color="grey">
+        <ion-input labelPlacement="floating" value="hi@ionic.io">
+          <div slot="label">Email Address</div>
+        </ion-input>
+      </ion-item>
+      <ion-item color="grey">
+
+        <ion-input label="Your Message" labelPlacement="stacked" placeholder="Write you're message here"></ion-input>
+        
+      </ion-item>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar color="grey">
+    <ion-button expand="full" mode="ios" color="pink" (click)="sendMessage()">
+      Submit
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,61 @@
+.text-capitalize {
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+
+ion-card {
+    margin: 10px 0;
+}
+ion-avatar {
+    height: 60px;   
+    width: 60px;
+}
+ion-avatar img {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.note {
+    font-size: 0.9em;
+    color: var(--ion-color-medium);
+    margin-bottom: 8px;
+}
+
+
+
+ion-card-content {
+    padding-top: 0;
+}
+
+.review-lable .name {
+    font-size:14px;
+}
+
+.review-lable .date {
+    font-size: 12px;
+}
+
+.premium-section {
+
+    ion-button {
+        margin-top: 2vh;
+        font-weight: 700;
+    }   
+}
+
+.premium-section-slider {
+
+    .premium-section-image img {
+        height: 160px;
+        object-fit: cover;
+        display: block;
+        border-radius: 10px;
+    }
+
+    .premium-section-image {
+        display: flex;
+        justify-content: center;
+    }
+}
+

@@ -1,0 +1,31 @@
+.title {
+    h5 {
+        font-weight: 700;
+        font-size: 18px;
+    }
+}
+
+ion-input {
+    --highlight-color :var(--ion-color-pink)
+}
+.details {
+    div {
+        margin: 5px 0px;
+    }
+
+    ion-icon,
+    span {
+        color: #939393;
+        letter-spacing: normal;
+        font-size: 14px;
+        font-weight: 700;
+    }
+}
+
+.profile-form {
+    ion-item {
+        border-bottom: 1px solid #6d6d6d;
+        margin-bottom: 15px;
+        --padding-start :0px
+    }
+}

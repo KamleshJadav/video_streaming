@@ -1,0 +1,170 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+// @import "@ionic/angular/css/palettes/dark.system.css";
+
+
+
+@font-face {
+    font-family: 'akayakanadaka';
+    src: url('/assets/fonts/akayakanadaka.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'parkinsans';
+    src: url('/assets/fonts/parkinsans.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.header-title {
+    font-weight: 700;
+    font-family: 'parkinsans';
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+.header-title.home {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: 'akayakanadaka';
+    letter-spacing: 1.45px;
+}
+
+.title .title-text {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'parkinsans';
+    letter-spacing: 1.45px;
+}
+
+* {
+    font-family: 'parkinsans';
+    letter-spacing: 1.45px;
+}
+
+img {
+    border-radius: 5px;
+}
+
+ion-breadcrumb::part(native) {
+    padding: 0px;
+}
+
+.back-icon {
+    font-size: 25px;
+    margin-left: 5px;
+}
+
+.searchbar-search-icon {
+    fill: #d02d56 !important;
+}
+
+.alert-button {
+    color: #d02d56 !important;
+}
+
+.category-slider {
+    .banner-image {
+        position: relative;
+        display: flex;
+        justify-content: center;
+
+        img {
+            height: 80px;
+            object-fit: cover;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        .text {
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
+    }
+
+}
+
+ion-action-sheet {
+    --background: var(--ion-color-grey) !important;
+    --button-color: var(--ion-color-white) !important;
+    --button-background-selected: var(--ion-color-grey) !important;
+}
+
+ion-action-sheet-button {
+    --background-hover: rgba(255, 255, 255, 0.1) !important;
+    --button-color: #fff !important;
+    --color: #fff !important;
+}
+
+ion-action-sheet-button[role="destructive"] {
+    --color: #ff4d4d !important;
+    --button-color: #ff4d4d !important;
+}
+
+ion-action-sheet-button[role="cancel"] {
+    --background-hover: rgba(255, 255, 255, 0.2) !important;
+}
+
+
+ion-input {
+    --highlight-color: var(--ion-color-pink)
+}
+
+swiper-container {
+    --swiper-pagination-bullet-inactive-color: #ffffff;
+    --swiper-pagination-color: var(--ion-color-pink, #000000);
+    
+  }
+  

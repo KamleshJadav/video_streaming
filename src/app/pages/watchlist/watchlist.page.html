@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md" color="black">
+    <ion-buttons class="back-icon" slot="start">
+      <ion-icon color="white" name="arrow-back" (click)="goBack()"></ion-icon>
+    </ion-buttons>
+    <ion-title class="header-title">Watchlist</ion-title>
+   
+  </ion-toolbar>
+   <!-- Segment for Filtering -->
+  <ion-toolbar  color="black">
+    <ion-segment mode="md" color="pink" scrollable="true" [(ngModel)]="selectedType" (ionChange)="filterMedia()">
+      <ion-segment-button value="all">
+        <ion-label>All</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="movie">
+        <ion-label>Movies</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="tvShow">
+        <ion-label>TV Shows</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="webSeries">
+        <ion-label>Web Series</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="black">
+    <ion-item-sliding class="media-card" *ngFor="let item of filteredMediaData">
+      <ion-item color="grey" >
+        <ion-grid>
+          <ion-row>
+            <!-- Left Side Image -->
+            <ion-col size="4" class="media-image">
+              <img [src]="item.image" [alt]="item.name" />
+            </ion-col>
+
+            <!-- Right Side Details -->
+            <ion-col size="8" class="media-details">
+              <ion-card-title class="media-title">{{ item.name }}</ion-card-title>
+              <p class="media-category">{{ item.category.join(', ') }}</p>
+              <p class="media-language">{{ item.language.join(', ') }}</p>
+              <p *ngIf="item.episodes" class="media-episodes">Episodes: {{ item.episodes }}</p>
+              <p class="media-size">Size: {{ item.size }}</p>
+              <!-- <ion-button expand="full" color="pink" size="small" class="download-button">
+                <ion-icon name="download-outline" class="ion-margin-end"></ion-icon>
+                Download
+              </ion-button> -->
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item-options side="end">
+      
+        <ion-item-option (click)="removeFromWatchlist(item)" color="pink" expandable>
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+</ion-content>

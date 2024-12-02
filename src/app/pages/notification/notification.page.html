@@ -1,0 +1,29 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md" color="black">
+    <ion-buttons class="back-icon" slot="start">
+      <ion-icon color="white" name="arrow-back" (click)="goBack()"></ion-icon>
+    </ion-buttons>
+    <ion-title class="header-title">Notification</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="grey">
+  <ng-container *ngFor="let notification of notifications; let i = index">
+    <ion-item-sliding>
+      <ion-item lines="none" color="gray" detail="false">
+        <ion-icon color="pink" class="notification-icon" slot="start" name="notifications-circle"></ion-icon>
+        <ion-label>
+          <strong class="title">{{notification.title}}</strong>
+          <ion-note color="medium" class="ion-text-wrap note">
+            {{notification.message}}
+          </ion-note>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="onSwipe(i)" color="pink" expandable>
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ng-container>
+</ion-content>

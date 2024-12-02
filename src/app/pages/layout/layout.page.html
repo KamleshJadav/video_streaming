@@ -1,0 +1,13 @@
+<ion-tabs>
+  <ion-tab-bar color="black" mode="md" slot="bottom">
+    <ion-tab-button (click)="goToHome()">
+      <ion-icon [color]="activeTab === 'home' ? 'pink' :''" aria-hidden="true" name="home-outline"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button (click)="goToSearch()">
+      <ion-icon [color]="activeTab === 'search' ? 'pink' :''" aria-hidden="true" name="search-outline"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button (click)="goToProfile()">
+      <ion-icon [color]="activeTab === 'profile' ? 'pink' :''" aria-hidden="true" name="person-outline"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

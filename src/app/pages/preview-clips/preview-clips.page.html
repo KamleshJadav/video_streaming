@@ -1,0 +1,126 @@
+<ion-content color="grey">
+  <!-- Sticky Image Section -->
+  <div class="image-container" [ngStyle]="{ 'background-image': 'url(' + imageUrl + ')' }">
+    <div class="back-icon">
+      <ion-icon color="white" name="arrow-back" (click)="goBack()"></ion-icon>
+    </div>
+    <div class="play-icon" (click)="goToPlayVideo()">
+      <ion-icon color="white" name="play"></ion-icon>
+    </div>
+  </div>
+
+  <!-- Scrollable Description Section -->
+  <div class="description-container">
+    <div class="title title_description">
+      <div class="text">
+        <ion-text class="title-text">
+          {{'Squid Game' | titlecase}}
+        </ion-text>
+      </div>
+      <div class="icon">
+        <img style="height: 35px; " class="ion-margin-end" src="assets/icon/save.svg" alt="">
+        <img style="height: 25px; " src="assets/icon/download.svg" alt="">
+      </div>
+    </div>
+    <div>
+      <ion-breadcrumbs>
+        <ion-breadcrumb color="white">
+          2021
+          <ion-icon color="white" slot="separator" class="separator" name="ellipse"></ion-icon>
+        </ion-breadcrumb>
+        <ion-breadcrumb color="white">
+          131 +
+          <ion-icon color="white" slot="separator" class="separator" name="ellipse"></ion-icon>
+        </ion-breadcrumb>
+        <ion-breadcrumb color="white">
+          Action & Adventure
+          <ion-icon color="white" slot="separator" class="separator" name="ellipse"></ion-icon>
+        </ion-breadcrumb>
+        <ion-breadcrumb color="white">
+          1h 30min
+          <ion-icon color="white" slot="separator" class="separator" name="ellipse"></ion-icon>
+        </ion-breadcrumb>
+      </ion-breadcrumbs>
+    </div>
+
+
+    <div class="star">
+      <ion-icon style="margin-left: 5px;" color="warning" name="star"></ion-icon>
+      <ion-icon style="margin-left: 5px;" color="warning" name="star"></ion-icon>
+      <ion-icon style="margin-left: 5px;" color="warning" name="star"></ion-icon>
+      <ion-icon style="margin-left: 5px;" color="warning" name="star"></ion-icon>
+      <ion-icon style="margin-left: 5px;" color="warning" name="star"></ion-icon>
+    </div>
+
+
+    <div class="description">
+      <ion-text>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa nihil magnam non minus debitis perferendis
+        aspernatur dolorum harum corporis velit reiciendis ut est quasi iste natus, blanditiis hic dolor at.
+      </ion-text>
+    </div>
+
+
+    <div class="star-cast ion-margin-top">
+      <div class="title title_description">
+        <div class="text">
+          <ion-text class="title-text">
+            {{'Star Cast' | titlecase}}
+          </ion-text>
+        </div>
+
+      </div>
+      <div class="star-cast-slider ion-margin-top">
+        <div class="div">
+          <swiper-container [spaceBetween]="5" [slidesPerView]="3.8">
+            <ng-container *ngFor="let  slide of starCast">
+              <swiper-slide>
+                <div class="star-cast-slider-slide">
+                  <div class="star-cast-slider-image">
+                    <img [src]="slide.image" alt="">
+                    <ion-text>
+                      {{slide.name | titlecase}}
+                    </ion-text>
+                  </div>
+                </div>
+              </swiper-slide>
+            </ng-container>
+          </swiper-container>
+        </div>
+      </div>
+
+      <div class="reviews ion-margin-top">
+        <div class="title title_description">
+          <div class="text">
+            <ion-text class="title-text">
+              {{'reviews' | titlecase}}
+            </ion-text>
+          </div>
+
+        </div>
+        <ion-card color="black" *ngFor="let review of reviews">
+          <ion-item color="black" lines="none">
+            <ion-avatar slot="start">
+              <img [src]="review.image" alt="{{ review.name }}">
+            </ion-avatar>
+            <ion-label class="review-lable">
+              <h2 class="name">{{ review.name }}</h2>
+              <p class="date" color="medium">{{ review.date |date}}</p>
+            </ion-label>
+            <ion-icon class="star-icon-review" name="star" color="warning" slot="end"></ion-icon>
+            <ion-icon class="star-icon-review" name="star" color="warning" slot="end"></ion-icon>
+            <ion-icon class="star-icon-review" name="star" color="warning" slot="end"></ion-icon>
+            <ion-icon class="star-icon-review" name="star" color="warning" slot="end"></ion-icon>
+            <ion-icon class="star-icon-review" name="star-outline" color="medium" slot="end"></ion-icon>
+          </ion-item>
+          <ion-card-content>
+            <p>{{ review.review }}</p>
+          </ion-card-content>
+        </ion-card>
+
+      </div>
+
+
+    </div>
+  </div>
+</ion-content>

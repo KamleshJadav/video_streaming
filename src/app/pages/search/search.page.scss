@@ -1,0 +1,40 @@
+ion-searchbar {
+    padding-inline-start: 16px;
+    padding-inline-end: 16px;
+}
+
+.searchbar-toolbar {
+    height: 65px;
+}
+
+ion-chip {
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.view-all {
+    font-size: 12px;
+}
+
+.view {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.search-item {
+    --min-height: 35px;
+    font-size: 14px !important;
+}
+
+.star-cast-slider {
+    .star-cast-slider-image img {
+        height: 75px;
+        object-fit: cover;
+        display: block;
+        border-radius: 10px;
+    }
+}
+ion-item {
+    --padding-start :0px
+}

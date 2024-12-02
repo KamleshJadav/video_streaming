@@ -1,0 +1,54 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md" color="black">
+    <ion-buttons class="back-icon" slot="start">
+      <ion-icon color="white" name="arrow-back" (click)="goBack()"></ion-icon>
+    </ion-buttons>
+    <ion-title class="header-title">Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="grey" class="ion-padding">
+  <div class="profile-container">
+    <!-- Profile Avatar Section -->
+    <div class="avatar-container">
+      <ion-avatar class="profile-avatar">
+        <img [src]="profileForm.profile_image" alt="Profile Avatar" />
+      </ion-avatar>
+      <ion-button class="camera-icon" size="small" fill="clear" (click)="changeProfilePicture()">
+        <ion-icon name="camera" color="pink"></ion-icon>
+      </ion-button>
+    </div>
+
+  </div>
+  <!-- Profile Form -->
+  <div class="profile-form">
+    <ion-item color="grey">
+      <ion-input labelPlacement="floating" value="John Doe">
+        <div style="color: 6d6d6d;" slot="label">Full Name</div>
+      </ion-input>
+    </ion-item>
+    <ion-item color="grey">
+      <ion-input labelPlacement="floating" value="hi@ionic.io">
+        <div slot="label">Email Address</div>
+      </ion-input>
+    </ion-item>
+    <ion-item color="grey">
+      <ion-input labelPlacement="floating" value="+123456789">
+        <div slot="label">Phone Number</div>
+      </ion-input>
+    </ion-item>
+    <ion-item color="grey">
+      <ion-input type="password" labelPlacement="floating" value="password123">
+        <div slot="label">Password</div>
+      </ion-input>
+    </ion-item>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar color="grey">
+    <ion-button expand="full" mode="ios" color="pink" (click)="saveProfile()">
+      Save
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

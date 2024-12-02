@@ -1,0 +1,53 @@
+.media-card {
+    margin: 10px;
+}
+
+.media-image img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.media-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.media-title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.media-category,
+.media-language,
+.media-episodes,
+.media-size {
+    font-size: 12px;
+    margin: 4px 0;
+}
+
+.download-button {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+ion-segment {
+    --color-checked: #ffffff !important;
+    --indicator-color: #ff4081;
+    ion-segment-button {
+        color: #ffffff !important;
+    }
+}
+
+ion-card-title {
+    color: var(--ion-color-white) !important;
+}
+
+ion-item {
+    --padding-start:0px
+}
+
+ion-item-sliding {
+    width: auto;
+}

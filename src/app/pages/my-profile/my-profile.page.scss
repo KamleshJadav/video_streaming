@@ -1,0 +1,47 @@
+.profile-form {
+    ion-item {
+        border-bottom: 1px solid #6d6d6d;
+        margin-bottom: 15px;
+        --padding-start :0px
+    }
+}
+ion-input {
+    --highlight-color :var(--ion-color-pink)
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.profile-avatar {
+    width: 100%;
+    height: 100%;
+    border: 2px solid white;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.camera-icon {
+    --padding-top: 5px;
+    --padding-bottom: 5px;
+    --padding-start: 5px;
+    --padding-end: 5px;
+    position: absolute;
+    bottom: -6px;
+    right: 0px;
+    background-color: var(--ion-color-white);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+}
+

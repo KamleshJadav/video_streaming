@@ -1,0 +1,94 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md" color="black">
+    <ion-title class="header-title">What'd You like to watch today?</ion-title>
+  </ion-toolbar>
+  <ion-toolbar class="searchbar-toolbar" mode="md" color="black">
+    <ion-searchbar color="grey"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="grey" class="ion-padding">
+  <div class="ion-padding">
+    <div>
+      <ng-container *ngFor="let keyword of searchKeywords | slice: 0:8">
+        <ion-chip color="light">{{ keyword.keyword | titlecase }}</ion-chip>
+      </ng-container>
+      <ion-chip *ngIf="searchKeywords.length > 8" color="light">...</ion-chip>
+    </div>
+
+    <div class="search ion-margin-top">
+      <div class="title view ">
+        <ion-text class="title-text">
+          Recent Searches
+        </ion-text>
+        <ion-text color="pink" class="title-text view-all">
+          Clear All
+        </ion-text>
+      </div>
+      <div class="ion-margin-top">
+          <ng-container *ngFor="let movie of recentSearches | slice: 0:5">
+            <ion-item lines="none" class="search-item" color="grey">
+              <ion-icon slot="start" name="search-outline" color="pink"></ion-icon>
+              <ion-label>{{ movie.label }}</ion-label>
+            </ion-item>
+          </ng-container>
+          <ion-item color="grey" *ngIf="recentSearches.length > 5">
+            <ion-label>...</ion-label>
+          </ion-item>
+
+      </div>
+
+    </div>
+    <div class="">
+      <!--  Category section -->
+      <div class="category">
+        <div class="title">
+          <ion-text class="title-text">
+            Category
+          </ion-text>
+        </div>
+        <div class="category-slider ion-margin-top">
+          <div class="div">
+            <swiper-container [spaceBetween]="10" [slidesPerView]="2.5">
+              <ng-container *ngFor="let slide of categorySlider">
+                <swiper-slide>
+                  <div class="banner-slide" (click)="clickOnViewAll()">
+                    <div class="banner-image">
+                      <img [src]="slide.image" alt="">
+                      <div class="overlay">
+                        <span class="text">{{ slide.text }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </swiper-slide>
+              </ng-container>
+            </swiper-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ion-margin-top">
+      <div class="title view ion-margin-bottom ">
+        <ion-text class="title-text">
+          Movies You May Like
+        </ion-text>
+        <ion-text color="pink" class="title-text view-all" (click)="clickOnViewAll()">
+          View All
+        </ion-text>
+      </div>
+      <div class="div star-cast-slider" >
+        <swiper-container [spaceBetween]="10" [slidesPerView]="3">
+          <ng-container *ngFor="let slide of movies">
+            <swiper-slide >
+              <div class="star-cast-slider-slide" (click)="clickOnPreviewClips()">
+                <div class="star-cast-slider-image">
+                  <img [src]="slide.image" alt="">
+                </div>
+              </div>
+            </swiper-slide>
+          </ng-container>
+        </swiper-container>
+      </div>
+    </div>
+  </div>
+</ion-content>

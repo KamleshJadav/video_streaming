@@ -1,0 +1,7 @@
+{
+  "name": "video-stream",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,7 @@
+<ion-content>
+  <div  class="margin">
+    <ion-item  *ngFor="let item of options" (click)="selectItem(item)">
+      {{ item.label }}
+    </ion-item>
+  </div>
+</ion-content>

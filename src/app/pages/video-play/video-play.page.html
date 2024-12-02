@@ -1,0 +1,84 @@
+<ion-content color="grey">
+  <!-- Back Icon -->
+  <!-- <div class="back-icon-container">
+    <ion-icon name="arrow-back-outline" class="back-icon" (click)="goBack()"></ion-icon>
+  </div> -->
+
+  <!-- Video Section -->
+  <!-- <div class="video-container">
+    <video controls>
+      <source
+        src="https://media.istockphoto.com/id/1972880655/video/closeup-shot-of-a-traditional-women-clothes-at-the-lok-mela-cultural-festival-in-islamabad.mp4?s=mp4-640x640-is&k=20&c=OyP3ysz8vExVUY5FUS_gtcTnIll0FyDHkJ-Mah8EA-I="
+        type="video/mp4" />
+    </video>
+  </div> -->
+
+  <div class="image-container" >
+    <div class="back-icon">
+      <ion-icon color="white" name="arrow-back" (click)="goBack()"></ion-icon>
+    </div>
+    <video controls id="videoPlayer">
+      <source
+        src="https://media.istockphoto.com/id/1972880655/video/closeup-shot-of-a-traditional-women-clothes-at-the-lok-mela-cultural-festival-in-islamabad.mp4?s=mp4-640x640-is&k=20&c=OyP3ysz8vExVUY5FUS_gtcTnIll0FyDHkJ-Mah8EA-I="
+        type="video/mp4" />
+    </video>
+    
+  </div>
+  <!-- Description Section -->
+  <div class="description-section ion-padding">
+    <div class="title title_description">
+      <div class="text">
+        <ion-text class="title-text">
+          {{'Squid Game' | titlecase}}
+        </ion-text>
+      </div>
+      <div class="icon">
+        <img style="height: 25px; " src="assets/icon/download.svg" alt="">
+      </div>
+    </div>
+    <div class="description">
+      <ion-text>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa nihil magnam non minus debitis perferendis
+        aspernatur dolorum harum corporis velit reiciendis ut est quasi iste natus, blanditiis hic dolor at.
+      </ion-text>
+    </div>
+
+    <div class="similar-movies ion-margin-top ">
+      <div class="title title_description ion-margin-bottom">
+        <div class="text">
+          <ion-text class="title-text">
+            {{ 'Similar movies' | titlecase }}
+          </ion-text>
+        </div>
+      </div>
+    
+      <div class="grid-container">
+        <ng-container *ngFor="let item of similarMovies">
+          <div class="grid-item" (click)="clickOnPreviewClips()">
+            <img [src]="item.image" alt="">
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+
+    <div class="more-like ion-margin-top ">
+      <div class="title title_description ion-margin-bottom">
+        <div class="text">
+          <ion-text class="title-text">
+            {{ 'More Like This' | titlecase }}
+          </ion-text>
+        </div>
+      </div>
+    
+      <div class="grid-container">
+        <ng-container *ngFor="let item of similarMovies">
+          <div class="grid-item" (click)="clickOnPreviewClips()">
+            <img [src]="item.image" alt="">
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    
+  </div>
+</ion-content>

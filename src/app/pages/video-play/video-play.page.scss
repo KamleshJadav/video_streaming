@@ -1,0 +1,94 @@
+/* Sticky Image Container */
+.image-container {
+    height: 25vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    /* Sticks at the top of the viewport */
+    z-index: 2;
+}
+
+.back-icon {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    font-size: 2rem;
+    color: white;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    z-index: 3;
+}
+
+video {
+    width: 100%;
+
+}
+
+.title_description {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .icon {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+}
+
+.description {
+    margin-top: 5px;
+    font-size: small;
+}
+
+
+.similar-movies {
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        /* 3 columns */
+        gap: 10px;
+        /* Space between items */
+    }
+
+    .grid-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    img {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+    }
+}
+
+.more-like {
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        /* 3 columns */
+        gap: 10px;
+        /* Space between items */
+    }
+
+    .grid-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    img {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+    }
+}

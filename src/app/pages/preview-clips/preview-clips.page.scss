@@ -1,0 +1,140 @@
+/* Sticky Image Container */
+.image-container {
+  height: 25vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  /* Sticks at the top of the viewport */
+  z-index: 2;
+}
+
+.back-icon {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-size: 2rem;
+  color: white;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.play-icon {
+  position: absolute;
+  font-size: 2rem;
+  border-radius: 50%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  background: var(--ion-color-pink);
+  z-index: 2;
+}
+
+.description-container {
+  position: sticky;
+  top: 25vh;
+  overflow-y: scroll;
+  padding: 16px;
+  //   z-index: 5;
+}
+
+.title_description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .icon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+}
+
+.separator {
+  font-size: 8px;
+  margin: 0px 5px;
+}
+
+ion-breadcrumb {
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.star {
+  margin-top: 10px;
+}
+
+.description {
+  margin-top: 5px;
+  font-size: small;
+}
+
+
+.star-cast-slider {
+
+  .star-cast-slider-image img {
+      object-fit: cover;
+      display: block;
+      border-radius: 10px;
+  }
+
+
+  .star-cast-slider-image {
+    text-align: center;
+    ion-text {
+      font-size: 12px;
+      text-align: center;
+      letter-spacing: normal;
+      font-weight: 700;
+    }
+
+  }
+  
+}
+
+ion-card {
+  margin: 10px 0;
+}
+
+ion-avatar img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.note {
+  font-size: 0.9em;
+  color: var(--ion-color-medium);
+  margin-bottom: 8px;
+}
+
+ion-card-content p {
+  margin: 0;
+  line-height: 1.4;
+  font-size: 10px;
+}
+
+ion-icon.star-icon-review {
+  font-size: 1.2em;
+  margin: 2px;
+}
+
+ion-card-content {
+  padding-top: 0;
+}
+.review-lable  .name {
+  font-size: 12px;
+}
+
+.review-lable  .date {
+  font-size: 10px;
+}

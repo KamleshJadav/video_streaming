@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md" color="black">
+    <ion-buttons class="back-icon" slot="start">
+      <ion-icon color="white" name="arrow-back" (click)="goBack()"></ion-icon>
+    </ion-buttons>
+    <ion-title class="header-title">Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content color="grey">
+  <div class="setting-form ion-padding">
+
+    <ion-item color="grey" >
+      <div class="custom-dropdown">
+        <div class="label">
+          <ion-text>Preferred App Language</ion-text>
+        </div>
+        <div class="value">
+          <ion-text>{{settinsData.appLanguage.label}}</ion-text>
+          <ion-icon color="pink" name="chevron-down" (click)="presentPopover($event,appLanguageOption,'appLanguage')"></ion-icon>
+        </div>
+      </div>
+    </ion-item>
+
+    <ion-item color="grey" >
+      <div class="custom-dropdown">
+        <div class="label">
+          <ion-text>Downloads</ion-text>
+        </div>
+        <div class="value">
+          <ion-text>{{settinsData.downlodeNetowk.label}}</ion-text>
+          <ion-icon color="pink" name="chevron-down" (click)="presentPopover($event,downlodeNetowkOption,'downlodeNetowk')"></ion-icon>
+        </div>
+      </div>
+    </ion-item>
+
+    <ion-item color="grey" >
+      <div class="custom-dropdown">
+        <div class="label">
+          <ion-text>Download Video Quality</ion-text>
+        </div>
+        <div class="value">
+          <ion-text>{{settinsData.downlodeQuelity.label}}</ion-text>
+          <ion-icon color="pink" name="chevron-down" (click)="presentPopover($event,downlodeQuelityOption,'downlodeQuelity')"></ion-icon>
+        </div>
+      </div>
+    </ion-item>
+
+
+  </div>
+</ion-content>
