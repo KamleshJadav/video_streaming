@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { ApiService } from 'src/app/custom/services/api.service';
 import { CapacitorAdsService } from 'src/app/custom/services/capacitor-ads.service';
 import { customurl } from 'src/app/custom/services/customdata';
+import { GlobalService } from 'src/app/custom/services/global.service';
 
 @Component({
   selector: 'app-layout',
@@ -12,14 +14,19 @@ export class LayoutPage implements OnInit {
   activeTab: string = 'home';
   constructor(
     private router: Router,
+    private api: ApiService,
+    private gs: GlobalService,
     private capAds: CapacitorAdsService,
 
   ) {
-    this.detectRouteChanges()
+    this.detectRouteChanges();
+    this.getAllCategory();
+    this.getPopular();
+    this.getTradding();
   }
 
   ngOnInit() {
-   
+
   }
 
   detectRouteChanges() {
@@ -58,5 +65,59 @@ export class LayoutPage implements OnInit {
     await this.capAds.showRandomInterstitialAd(0.5);
     this.activeTab = 'profile';
     this.router.navigate([customurl.profile]);
+  }
+
+  getAllCategory() {
+    this.api.getAllCategory().subscribe({
+      next: async (response: any) => {
+        if (response.success) {
+          console.log('response', response);
+          this.gs.allCategory = response.data;
+        } else {
+          this.gs.showError(response.message, 'Error')
+        }
+      },
+      error: async (error) => {
+      },
+      complete: () => {
+
+      },
+    });
+  } 
+  
+  getTradding() {
+    this.api.getTradding().subscribe({
+      next: async (response: any) => {
+        if (response.success) {
+          console.log('allTradingVideo', response);
+          this.gs.allTradingVideo = response.data;
+        } else {
+          this.gs.showError(response.message, 'Error')
+        }
+      },
+      error: async (error) => {
+      },
+      complete: () => {
+
+      },
+    });
+  } 
+  
+  getPopular() {
+    this.api.getPopular().subscribe({
+      next: async (response: any) => {
+        if (response.success) {
+          console.log('allPopularVideo', response);
+          this.gs.allPopularVideo = response.data;
+        } else {
+          this.gs.showError(response.message, 'Error')
+        }
+      },
+      error: async (error) => {
+      },
+      complete: () => {
+
+      },
+    });
   }
 }

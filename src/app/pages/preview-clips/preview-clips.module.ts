@@ -7,13 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { PreviewClipsPageRoutingModule } from './preview-clips-routing.module';
 
 import { PreviewClipsPage } from './preview-clips.page';
+import { SharedModule } from 'src/app/custom/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PreviewClipsPageRoutingModule
+    PreviewClipsPageRoutingModule,SharedModule
   ],
   declarations: [PreviewClipsPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

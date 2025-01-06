@@ -1,6 +1,5 @@
-<ion-content color="grey">
-  <!-- Sticky Image Section -->
-  <div class="image-container" [ngStyle]="{ 'background-image': 'url(' + imageUrl + ')' }">
+<!-- <ion-content color="grey">
+  <div class="image-container" [ngStyle]="{ 'background-image': 'url(' +   videoImageURl + ')' }">
     <div class="back-icon">
       <ion-icon color="white" name="arrow-back" (click)="goBack()"></ion-icon>
     </div>
@@ -9,7 +8,6 @@
     </div>
   </div>
 
-  <!-- Scrollable Description Section -->
   <div class="description-container">
     <div class="title title_description">
       <div class="text">
@@ -77,7 +75,7 @@
               <swiper-slide>
                 <div class="star-cast-slider-slide">
                   <div class="star-cast-slider-image">
-                    <img [src]="slide.image" alt="">
+                    <img [src]="actorImageURl+slide.image" alt="">
                     <ion-text>
                       {{slide.name | titlecase}}
                     </ion-text>
@@ -123,4 +121,123 @@
 
     </div>
   </div>
+</ion-content> -->
+
+<ion-content scroll-y="true" color="grey">
+  <div class="image-container" [ngStyle]="{ 'background-image': 'url(' +   videoImageURl + this.videoData.thumb_name + ')' }">
+    <div class="back-icon">
+      <ion-icon color="white" name="arrow-back" (click)="goBack()"></ion-icon>
+    </div>
+    <div class="play-icon" (click)="goToPlayVideo()">
+      <ion-icon color="white" name="play"></ion-icon>
+    </div>
+  </div>
+
+  <virtual-scroll-element class="ion-content-scroll-host" *ngIf="videoData">
+    <div class="description-container">
+      <div class="title title_description">
+        <div class="text">
+          <ion-text class="title-text" *ngIf="videoData.title">
+            {{videoData.title  | titlecase}}
+          </ion-text>
+        </div>
+        <div class="icon">
+          <img style="height: 35px; " class="" src="assets/icon/save.svg" alt="">
+        </div>
+      </div>
+     
+      <div  *ngIf="seo_teg && seo_teg.length">
+        <ion-breadcrumbs> 
+          <ng-container *ngFor="let hash of seo_teg ">
+            <ion-breadcrumb color="white">
+              {{hash | hashteg}}
+              <ion-icon color="white" slot="separator" class="separator" name="ellipse"></ion-icon>
+            </ion-breadcrumb>
+          </ng-container>
+        
+        </ion-breadcrumbs>
+      </div>
+  
+   
+      <div class="star views" *ngIf="videoData.views">
+        <ion-icon name="eye-outline"></ion-icon> <ion-text class="count">{{videoData.views | shortNumber}}</ion-text> 
+      </div>
+  
+  
+      <div class="description">
+        <ion-text *ngIf="videoData.description">
+          <p [innerHTML]="videoData.description | truncate:200:showFullText"></p>
+        <a *ngIf="!showFullText" (click)="toggleText()" class="view-more">View More</a>
+        <a *ngIf="showFullText" (click)="toggleText()" class="view-less">View Less</a>
+
+        </ion-text>
+      </div>
+  
+  
+      <div class="star-cast ion-margin-top">
+        <div class="title title_description">
+          <div class="text">
+            <ion-text class="title-text">
+              {{'Star Cast' | titlecase}}
+            </ion-text>
+          </div>
+  
+        </div>
+        <div class="star-cast-slider ion-margin-top">
+          <div class="div">
+            <swiper-container [spaceBetween]="5" [slidesPerView]="3.8">
+              <ng-container *ngFor="let  slide of starCast">
+                <swiper-slide>
+                  <div class="star-cast-slider-slide">
+                    <div class="star-cast-slider-image">
+                      <img [src]="actorImageURl+slide.image" alt="">
+                      <ion-text>
+                        {{slide.name | titlecase}}
+                      </ion-text>
+                    </div>
+                  </div>
+                </swiper-slide>
+              </ng-container>
+            </swiper-container>
+          </div>
+        </div>
+  
+        <div class="reviews ion-margin-top">
+          <div class="title title_description">
+            <div class="text">
+              <ion-text class="title-text">
+                {{'reviews' | titlecase}}
+              </ion-text>
+            </div>
+  
+          </div>
+          <ion-card color="black" *ngFor="let review of reviews">
+            <ion-item color="black" lines="none">
+              <ion-avatar slot="start">
+                <img [src]="review.image" alt="{{ review.name }}">
+              </ion-avatar>
+              <ion-label class="review-lable">
+                <h2 class="name">{{ review.name }}</h2>
+                <p class="date" color="medium">{{ review.date |date}}</p>
+              </ion-label>
+              <ion-icon class="star-icon-review" name="star" color="warning" slot="end"></ion-icon>
+              <ion-icon class="star-icon-review" name="star" color="warning" slot="end"></ion-icon>
+              <ion-icon class="star-icon-review" name="star" color="warning" slot="end"></ion-icon>
+              <ion-icon class="star-icon-review" name="star" color="warning" slot="end"></ion-icon>
+              <ion-icon class="star-icon-review" name="star-outline" color="medium" slot="end"></ion-icon>
+            </ion-item>
+            <ion-card-content>
+              <p>{{ review.review }}</p>
+            </ion-card-content>
+          </ion-card>
+  
+        </div>
+  
+      </div>
+    </div>
+  </virtual-scroll-element>
+  <ion-infinite-scroll>
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
+

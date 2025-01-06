@@ -1,8 +1,10 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from 'src/app/custom/services/api.service';
 import { CapacitorAdsService } from 'src/app/custom/services/capacitor-ads.service';
 import { customurl } from 'src/app/custom/services/customdata';
+import { GlobalService } from 'src/app/custom/services/global.service';
 import { HelperService } from 'src/app/custom/services/helper.service';
 
 @Component({
@@ -11,19 +13,16 @@ import { HelperService } from 'src/app/custom/services/helper.service';
   styleUrls: ['./preview-clips.page.scss'],
 })
 export class PreviewClipsPage implements OnInit {
-  imageUrl: string = 'assets/images-temp/10.jpg';
-  starCast = [
-    { image: 'assets/images-temp/11.jpg', name: 'Vin Diesel' },
-    { image: 'assets/images-temp/12.jpg', name: 'Michelle Rodriguez' },
-    { image: 'assets/images-temp/13.jpg', name: 'Jason Statham' },
-    { image: 'assets/images-temp/14.jpg', name: 'Scott Eastwood' },
-    { image: 'assets/images-temp/15.jpg', name: 'Elsa Pataky' },
-    { image: 'assets/images-temp/16.jpg', name: 'Ludacris' },
-    { image: 'assets/images-temp/17.jpg', name: 'Dwayne Johnson' },
-    { image: 'assets/images-temp/18.jpg', name: 'Charlize Theron' },
-    { image: 'assets/images-temp/19.jpg', name: 'Tyrese Gibson' },
-  ]
+  actorImageURl: string = this.api.assetsUrl + 'image/actor/'
+  videoImageURl: string = this.api.assetsUrl + 'video_thmb/'
+  videoData: any = {}
+  starCast: any = [ ]
+  seo_teg: any = [ ]
+  showFullText: boolean = false;
 
+  toggleText() {
+    this.showFullText = !this.showFullText;
+  }
   reviews = [
     {
       image: 'assets/images-temp/11.jpg',
@@ -89,26 +88,47 @@ export class PreviewClipsPage implements OnInit {
       state: 'Illinois',
     },
   ];
+  video_id: any = '';
   constructor(
     private location: Location,
     public helper: HelperService,
+    public api: ApiService,
+    public gs: GlobalService,
     private router: Router,
     private capAds: CapacitorAdsService,
+    private route: ActivatedRoute,
 
   ) { }
 
   ngOnInit() {
-    this.starCast = this.helper.shuffleArray(this.starCast);
-    this.reviews = this.helper.shuffleArray(this.reviews);
+    this.route.queryParamMap.subscribe(params => {
+      if (params.has('video_id')) {
+        this.video_id = params.get('video_id');
+        this.getVideoById();
+      }
+    });
   }
 
   goBack() {
     this.location.back();
   }
+
   async goToPlayVideo() {
     await this.capAds.showRandomInterstitialAd(0.5);
-    this.router.navigate([customurl.playVideo])
+    this.router.navigate([customurl.playVideo], { queryParams: { video_id: this.video_id } })
   }
 
-
+  getVideoById() {
+    this.api.getVideoById(this.video_id).subscribe((response: any) => {
+      if (response.success) {
+        this.videoData = response.data;
+        
+        this.starCast = this.videoData.actors;
+        this.seo_teg = this.videoData.seo_teg;
+        console.log(this.seo_teg);
+      }
+    }, (error) => {
+      console.error('Error fetching videos:', error);
+    });
+  }
 }

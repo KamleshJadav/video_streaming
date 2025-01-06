@@ -1,6 +1,6 @@
 /* Sticky Image Container */
 .image-container {
-    height: 25vh;
+    height: 30vh;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -11,6 +11,11 @@
     top: 0;
     /* Sticks at the top of the viewport */
     z-index: 2;
+
+    video {
+        max-height: 30vh;
+        background-color: black;
+    }
 }
 
 .back-icon {
