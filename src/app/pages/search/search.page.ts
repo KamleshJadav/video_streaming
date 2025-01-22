@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/app/custom/services/api.service';
 import { CapacitorAdsService } from 'src/app/custom/services/capacitor-ads.service';
 import { customurl } from 'src/app/custom/services/customdata';
+import { GlobalService } from 'src/app/custom/services/global.service';
 import { HelperService } from 'src/app/custom/services/helper.service';
 
 @Component({
@@ -10,6 +12,7 @@ import { HelperService } from 'src/app/custom/services/helper.service';
   styleUrls: ['./search.page.scss'],
 })
 export class SearchPage implements OnInit {
+  bannerImageURl: string = this.api.assetsUrl + 'image/category/'
   searchKeywords = [
     { id: 1, keyword: "trending movies", category: "general", type: "movie" },
     { id: 2, keyword: "popular series", category: "general", type: "series" },
@@ -34,13 +37,6 @@ export class SearchPage implements OnInit {
     { id: 8, label: 'Parasite' },
   ];
 
-  categorySlider: any = [
-    { image: 'assets/images-temp/6.jpg', text: 'Adventure' },
-    { image: 'assets/images-temp/7.jpg', text: 'Thriller' },
-    { image: 'assets/images-temp/8.jpg', text: 'Comedy' },
-    { image: 'assets/images-temp/9.jpg', text: 'Drama' },
-    { image: 'assets/images-temp/6.jpg', text: 'Action' },
-  ];
 
   movies: any = [
     { image: 'assets/images-temp/6.jpg' },
@@ -51,6 +47,8 @@ export class SearchPage implements OnInit {
   ];
   constructor(
     public helper: HelperService,
+    public api: ApiService,
+    public gs: GlobalService,
     private router: Router,
     private capAds: CapacitorAdsService,
 
@@ -59,12 +57,12 @@ export class SearchPage implements OnInit {
   ngOnInit() {
     this.searchKeywords = this.helper.shuffleArray(this.searchKeywords);
     this.recentSearches = this.helper.shuffleArray(this.recentSearches);
-    this.categorySlider = this.helper.shuffleArray(this.categorySlider);
     this.movies = this.helper.shuffleArray(this.movies);
   }
-  async clickOnViewAll() {
+  
+  async clickOnViewAll(params:any = {}) {
     await this.capAds.showRandomInterstitialAd(0.5);
-    this.router.navigate([customurl.viewAll])
+    this.router.navigate([customurl.viewAll],{queryParams:params})
   }
 
   async clickOnPreviewClips() {

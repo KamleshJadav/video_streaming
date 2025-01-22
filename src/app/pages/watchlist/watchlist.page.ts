@@ -1,5 +1,11 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Videos } from 'src/app/custom/models/video.modal';
+import { ApiService } from 'src/app/custom/services/api.service';
+import { CapacitorAdsService } from 'src/app/custom/services/capacitor-ads.service';
+import { customurl } from 'src/app/custom/services/customdata';
+import { GlobalService } from 'src/app/custom/services/global.service';
 import { HelperService } from 'src/app/custom/services/helper.service';
 
 @Component({
@@ -8,157 +14,59 @@ import { HelperService } from 'src/app/custom/services/helper.service';
   styleUrls: ['./watchlist.page.scss'],
 })
 export class WatchlistPage implements OnInit {
-  mediaData = [
-    {
-      type: "movie",
-      name: "Inception",
-      category: ["Action", "Drama", "Sci-Fi"],
-      language: ["English", "Hindi", "French"],
-      episodes: null,
-      size: "2.3GB",
-      image: "assets/images-temp/1.jpg",
-    },
-    {
-      type: "tvShow",
-      name: "Breaking Bad",
-      category: ["Crime", "Drama", "Thriller"],
-      language: ["English", "Spanish"],
-      episodes: 62,
-      size: "15GB",
-      image: "assets/images-temp/2.jpg",
-    },
-    {
-      type: "webSeries",
-      name: "Stranger Things",
-      category: ["Sci-Fi", "Horror", "Thriller"],
-      language: ["English", "Hindi"],
-      episodes: 34,
-      size: "10GB",
-      image: "assets/images-temp/3.jpg",
-    },
-    {
-      type: "movie",
-      name: "The Dark Knight",
-      category: ["Action", "Drama", "Crime"],
-      language: ["English", "Hindi"],
-      episodes: null,
-      size: "2.6GB",
-      image: "assets/images-temp/4.jpg",
-    },
-    {
-      type: "webSeries",
-      name: "The Witcher",
-      category: ["Fantasy", "Drama", "Action"],
-      language: ["English", "Polish"],
-      episodes: 16,
-      size: "12GB",
-      image: "assets/images-temp/5.jpg",
-    },
-    {
-      type: "tvShow",
-      name: "Game of Thrones",
-      category: ["Fantasy", "Drama", "Adventure"],
-      language: ["English", "Hindi"],
-      episodes: 73,
-      size: "25GB",
-      image: "assets/images-temp/1.jpg",
-    },
-    {
-      type: "movie",
-      name: "Interstellar",
-      category: ["Sci-Fi", "Drama", "Adventure"],
-      language: ["English", "Hindi"],
-      episodes: null,
-      size: "2.8GB",
-      image: "assets/images-temp/2.jpg",
-    },
-    {
-      type: "webSeries",
-      name: "Money Heist",
-      category: ["Crime", "Drama", "Thriller"],
-      language: ["Spanish", "English"],
-      episodes: 41,
-      size: "18GB",
-      image: "assets/images-temp/3.jpg",
-    },
-    {
-      type: "movie",
-      name: "Avengers: Endgame",
-      category: ["Action", "Adventure", "Sci-Fi"],
-      language: ["English", "Hindi"],
-      episodes: null,
-      size: "3GB",
-      image: "assets/images-temp/4.jpg",
-    },
-    {
-      type: "tvShow",
-      name: "Friends",
-      category: ["Comedy", "Drama", "Sitcom"],
-      language: ["English", "Spanish"],
-      episodes: 236,
-      size: "35GB",
-      image: "assets/images-temp/5.jpg",
-    },
-    {
-      type: "webSeries",
-      name: "The Boys",
-      category: ["Action", "Drama", "Superhero"],
-      language: ["English", "Hindi"],
-      episodes: 24,
-      size: "10GB",
-      image: "assets/images-temp/1.jpg",
-    },
-    {
-      type: "movie",
-      name: "Avatar",
-      category: ["Sci-Fi", "Adventure", "Fantasy"],
-      language: ["English", "Hindi"],
-      episodes: null,
-      size: "2.9GB",
-      image: "assets/images-temp/2.jpg",
-    },
-    {
-      type: "webSeries",
-      name: "The Mandalorian",
-      category: ["Sci-Fi", "Adventure", "Action"],
-      language: ["English"],
-      episodes: 24,
-      size: "8GB",
-      image: "assets/images-temp/3.jpg",
-    },
-    {
-      type: "tvShow",
-      name: "The Office",
-      category: ["Comedy", "Drama", "Sitcom"],
-      language: ["English"],
-      episodes: 201,
-      size: "22GB",
-      image: "assets/images-temp/4.jpg",
-    },
-    {
-      type: "movie",
-      name: "Joker",
-      category: ["Drama", "Crime", "Thriller"],
-      language: ["English", "Hindi"],
-      episodes: null,
-      size: "2.4GB",
-      image: "assets/images-temp/5.jpg",
-    },
-  ];
 
-  selectedType: string = 'all';
-  filteredMediaData = [...this.mediaData];
+  videoImageURl: string = this.api.assetsUrl + 'video_thmb/'
+  selectedType: any = 'all';
+  mediaData: Videos = [];
+  filteredMediaData: Videos = [];
   constructor(
     public helper: HelperService,
+    public gs: GlobalService,
+    public api: ApiService,
     private location: Location,
+    private capAds: CapacitorAdsService,
+    public router: Router,
+    
   ) { }
 
   ngOnInit() {
-    this.filteredMediaData = this.helper.shuffleArray(this.filteredMediaData);
   }
 
   goBack() {
     this.location.back();
+  }
+  ionViewDidEnter() {
+    this.getAllWishList()
+  }
+  getAllWishList() {
+    let body = {
+      user_id: 1, // changes are available
+    }
+    this.api.getAllWishList(body).subscribe((response: any) => {
+      if (response.success) {
+        console.log(response);
+        this.mediaData = response.data;
+        this.filterMedia();
+      }
+    }, (error) => {
+      console.error('Error fetching videos:', error);
+    });
+  }
+
+  removeFromWatchlist(item: any) {
+    let body = {
+      video_id: item.video_id,
+      user_id: 1, // changes are available
+    }
+    this.api.wishListToggle(body).subscribe((response: any) => {
+      if (response.success) {
+        this.gs.showSuccess(response.message);
+        this.getAllWishList();
+      }
+    }, (error) => {
+      console.error('Error fetching videos:', error);
+    });
+
   }
 
   filterMedia() {
@@ -167,16 +75,13 @@ export class WatchlistPage implements OnInit {
       this.filteredMediaData = [...this.mediaData];
     } else {
       this.filteredMediaData = this.mediaData.filter(
-        (item) => item.type === this.selectedType
+        (item) => item.category_id == this.selectedType
       );
     }
-    this.filteredMediaData = this.helper.shuffleArray(this.filteredMediaData);
   }
-
-  removeFromWatchlist(item: any) {
-    // Remove item from the watchlist
-    this.mediaData = this.mediaData.filter((media) => media !== item);
-    this.filterMedia(); // Reapply filter to reflect changes
+  async clickOnPreviewClips(params: any = {}) {
+    await this.capAds.showRandomInterstitialAd(0.5);
+    this.router.navigate([customurl.previewclips], { queryParams: params });
   }
 
 }

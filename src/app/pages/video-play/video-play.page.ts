@@ -25,6 +25,10 @@ export class VideoPlayPage implements OnInit {
   videoImageURl: string = this.api.assetsUrl + 'video_thmb/'
   videoData: any = {};
   video_id: any = '';
+  showFullText: boolean = false;
+  toggleText() {
+    this.showFullText = !this.showFullText;
+  }
   constructor(
     private location: Location,
     public helper: HelperService,
@@ -98,7 +102,11 @@ export class VideoPlayPage implements OnInit {
   }
 
   getVideoById() {
-    this.api.getVideoById(this.video_id).subscribe((response: any) => {
+    let body = {
+      video_id: this.video_id,
+      user_id: 1, // changes are available
+    }
+    this.api.getVideoById(body).subscribe((response: any) => {
       if (response.success) {
         this.videoData = response.data;
         this.videoImageURl += this.videoData.thumb_name

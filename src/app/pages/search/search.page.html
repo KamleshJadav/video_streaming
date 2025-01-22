@@ -41,7 +41,7 @@
     </div>
     <div class="">
       <!--  Category section -->
-      <div class="category">
+      <div class="category" *ngIf="gs.allCategory && gs.allCategory.length">
         <div class="title">
           <ion-text class="title-text">
             Category
@@ -50,13 +50,13 @@
         <div class="category-slider ion-margin-top">
           <div class="div">
             <swiper-container [spaceBetween]="10" [slidesPerView]="2.5">
-              <ng-container *ngFor="let slide of categorySlider">
+              <ng-container *ngFor="let slide of gs.allCategory">
                 <swiper-slide>
-                  <div class="banner-slide" (click)="clickOnViewAll()">
+                  <div class="banner-slide" (click)="clickOnViewAll({category_id:slide.id,headertext:slide.name})">
                     <div class="banner-image">
-                      <img [src]="slide.image" alt="">
+                      <img [src]="bannerImageURl+slide.image" alt="">
                       <div class="overlay">
-                        <span class="text">{{ slide.text }}</span>
+                        <span class="text">{{ slide.name }} </span>
                       </div>
                     </div>
                   </div>
@@ -72,7 +72,7 @@
         <ion-text class="title-text">
           Movies You May Like
         </ion-text>
-        <ion-text color="pink" class="title-text view-all" (click)="clickOnViewAll()">
+        <ion-text color="pink" class="title-text view-all">
           View All
         </ion-text>
       </div>

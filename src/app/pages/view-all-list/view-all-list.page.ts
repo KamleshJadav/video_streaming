@@ -27,7 +27,7 @@ export class ViewAllListPage implements OnInit {
     total: 0
   };
 
-  allVideos: Videos = []; 
+  allVideos: Videos = [];
   isLoading: boolean = false; // Flag to track loading state
 
   constructor(
@@ -42,10 +42,12 @@ export class ViewAllListPage implements OnInit {
 
   ngOnInit() {
     this.route.queryParamMap.subscribe(params => {
+      console.log(">>>>>>>>>");
+
       if (params.has('tradding')) {
         this.tradding = params.get('tradding');
-      } 
-      
+      }
+
       if (params.has('headertext')) {
         this.headertext = params.get('headertext');
       }
@@ -55,16 +57,18 @@ export class ViewAllListPage implements OnInit {
       if (params.has('category_id')) {
         this.category_id = params.get('category_id');
       }
+      this.pagination.p = 1;
+      this.allVideos = [];
+
       this.getVideoPaginated(); // Initial data load
     });
   }
 
   // Method to fetch paginated videos
   getVideoPaginated() {
-    // If already loading, prevent multiple API calls
     if (this.isLoading) return;
 
-    this.isLoading = true; // Set loading flag to true
+    this.isLoading = true;
     const queryParams: any = {
       page: this.pagination.p,
       pageSize: this.pagination.pageSize
@@ -81,6 +85,7 @@ export class ViewAllListPage implements OnInit {
     if (this.category_id) {
       queryParams.category_id = this.category_id;
     }
+    console.log("queryParams", queryParams);
 
     // Make the API call
     this.api.getVideoPaginated(queryParams).subscribe((response: any) => {
@@ -88,32 +93,45 @@ export class ViewAllListPage implements OnInit {
         this.allVideos = [...this.allVideos, ...response.data];
         this.pagination.total = response.total_records;
       }
-      this.isLoading = false; 
+      this.isLoading = false;
     }, (error) => {
       console.error('Error fetching videos:', error);
-      this.isLoading = false; 
+      this.isLoading = false;
     });
   }
 
   loadMoreVideos(event: any) {
     if (this.isLoading) {
-      event.target.complete(); 
+      event.target.complete();
       return;
     }
 
     if (this.allVideos.length < this.pagination.total) {
       this.pagination.p += 1;
-      this.getVideoPaginated(); 
+      this.getVideoPaginated();
       setTimeout(() => {
-        event.target.complete(); 
+        event.target.complete();
       }, 1000);
     } else {
-      event.target.disabled = true; 
+      event.target.disabled = true;
     }
   }
 
-  // Method to reset filters and reload videos
   resetFilters() {
+
+    this.getVideoPaginated();
+  }
+
+  async clickOnPreviewClips(params: any = {}) {
+    await this.capAds.showRandomInterstitialAd(0.5);
+    this.router.navigate([customurl.previewclips], { queryParams: params });
+  }
+
+  goBack() {
+    this.location.back();
+  }
+
+  ionViewDidLeave() {
     this.tradding = 0;
     this.popular = 0;
     this.category_id = 0;
@@ -121,15 +139,5 @@ export class ViewAllListPage implements OnInit {
     this.pagination.p = 1;
     this.allVideos = [];
 
-    this.getVideoPaginated();
-  }
-
-  async clickOnPreviewClips(params:any={}) {
-    await this.capAds.showRandomInterstitialAd(0.5);
-    this.router.navigate([customurl.previewclips],{queryParams:params});
-  }
-
-  goBack() {
-    this.location.back();
   }
 }

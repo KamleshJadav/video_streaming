@@ -82,14 +82,15 @@ ion-breadcrumb {
 .star-cast-slider {
 
   .star-cast-slider-image img {
-      object-fit: cover;
-      display: block;
-      border-radius: 10px;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
   }
 
 
   .star-cast-slider-image {
     text-align: center;
+
     ion-text {
       font-size: 12px;
       text-align: center;
@@ -98,7 +99,7 @@ ion-breadcrumb {
     }
 
   }
-  
+
 }
 
 ion-card {
@@ -130,11 +131,12 @@ ion-icon.star-icon-review {
 ion-card-content {
   padding-top: 0;
 }
-.review-lable  .name {
+
+.review-lable .name {
   font-size: 12px;
 }
 
-.review-lable  .date {
+.review-lable .date {
   font-size: 10px;
 }
 
@@ -142,7 +144,14 @@ ion-card-content {
   font-size: 11px;
   align-items: center;
   display: flex;
+
   .count {
     margin-left: 5px;
   }
+}
+
+
+.view-more,
+.view-less {
+  color: #757b87 !important;
 }

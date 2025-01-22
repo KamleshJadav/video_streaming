@@ -142,7 +142,7 @@
           </ion-text>
         </div>
         <div class="icon">
-          <img style="height: 35px; " class="" src="assets/icon/save.svg" alt="">
+          <ion-icon (click)="toggleWishlist(videoData)" [name]="videoData.isInWishlist ? 'heart' : 'heart-outline'"    [color]="videoData.isInWishlist ?'danger' :''" style="font-size: 20px;"></ion-icon>
         </div>
       </div>
      
@@ -151,7 +151,7 @@
           <ng-container *ngFor="let hash of seo_teg ">
             <ion-breadcrumb color="white">
               {{hash | hashteg}}
-              <ion-icon color="white" slot="separator" class="separator" name="ellipse"></ion-icon>
+              <ion-icon color="dark" slot="separator" class="separator" name="ellipse"></ion-icon>
             </ion-breadcrumb>
           </ng-container>
         

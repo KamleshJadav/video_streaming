@@ -33,13 +33,14 @@
         </ion-text>
       </div>
       <div class="icon">
-        <img style="height: 25px; " src="assets/icon/download.svg" alt="">
       </div>
     </div>
     <div class="description">
-      <ion-text>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa nihil magnam non minus debitis perferendis
-        aspernatur dolorum harum corporis velit reiciendis ut est quasi iste natus, blanditiis hic dolor at.
+      <ion-text *ngIf="videoData.description">
+        <p [innerHTML]="videoData.description | truncate:200:showFullText"></p>
+      <a *ngIf="!showFullText" (click)="toggleText()" class="view-more">View More</a>
+      <a *ngIf="showFullText" (click)="toggleText()" class="view-less">View Less</a>
+
       </ion-text>
     </div>
 

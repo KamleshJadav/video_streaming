@@ -37,9 +37,17 @@ export class ApiService {
     return this.http.get<void>(`${this.apiUrl}videos/get-mobile-paginated`,{params:queryParams});
   }
 
-  getVideoById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}videos/get-by-id-mobile/${id}`);
+  getVideoById(queryParams:any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}videos/get-by-id-mobile`,{params:queryParams});
   }
+  wishListToggle(queryParams:any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}wishlist/toggle`,queryParams);
+  }
+
+  getAllWishList(queryParams:any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}wishlist/get-all`,queryParams);
+  }
+  
 
  // createCategory(category: any): Observable<Category> {
   //   return this.http.post<Category>(this.apiUrl + 'categories/add', category);
@@ -80,6 +88,10 @@ export class ApiService {
     return this.http.post<void>(`${this.apiUrl}user/change-password`, user);
   }
 
+
+  getNotificationPaginated(queryParams:any) {
+    return this.http.get<void>(`${this.apiUrl}notification/user-all-notification`,{params:queryParams});
+  }
 
 }
 

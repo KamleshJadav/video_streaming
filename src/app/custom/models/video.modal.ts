@@ -7,6 +7,7 @@ export interface Video {
     channel_id?: string,    
     category_name?: string,
     channel_name?: string,
+    isInWishlist?: boolean,
     views?: string,
     likes?: string,
     description?: string,
@@ -14,10 +15,11 @@ export interface Video {
     video?: string,
     created_at?: Date,
     updated_at?: Date,
-    actors?:Actors,
+    actors?:Actors | any,
     trending?:boolean,
     popular?:boolean,
     thumb_name?:string,
+    video_id?:string,
 }
 interface actor {
     id?: string,

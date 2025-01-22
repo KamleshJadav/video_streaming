@@ -12,46 +12,35 @@
       <ion-segment-button value="all">
         <ion-label>All</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="movie">
-        <ion-label>Movies</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="tvShow">
-        <ion-label>TV Shows</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="webSeries">
-        <ion-label>Web Series</ion-label>
-      </ion-segment-button>
+      <ng-container *ngFor="let category of gs.allCategory">
+        <ion-segment-button [value]="category.id">
+          <ion-label>{{category.name | uppercase}}</ion-label>
+        </ion-segment-button>
+      </ng-container>
+    
     </ion-segment>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="black">
     <ion-item-sliding class="media-card" *ngFor="let item of filteredMediaData">
-      <ion-item color="grey" >
+      <ion-item color="grey"  (click)="clickOnPreviewClips({video_id:item.video_id})">
         <ion-grid>
           <ion-row>
-            <!-- Left Side Image -->
             <ion-col size="4" class="media-image">
-              <img [src]="item.image" [alt]="item.name" />
+              <img [src]="videoImageURl + item.thumb_name" [alt]="item.title" />
             </ion-col>
 
-            <!-- Right Side Details -->
             <ion-col size="8" class="media-details">
-              <ion-card-title class="media-title">{{ item.name }}</ion-card-title>
-              <p class="media-category">{{ item.category.join(', ') }}</p>
-              <p class="media-language">{{ item.language.join(', ') }}</p>
-              <p *ngIf="item.episodes" class="media-episodes">Episodes: {{ item.episodes }}</p>
-              <p class="media-size">Size: {{ item.size }}</p>
-              <!-- <ion-button expand="full" color="pink" size="small" class="download-button">
-                <ion-icon name="download-outline" class="ion-margin-end"></ion-icon>
-                Download
-              </ion-button> -->
+              <ion-card-title class="media-title">{{ item.title }}</ion-card-title>
+              <p class="media-category">{{ item.category_name }}</p>
+              <p class="media-language">{{ item.channel_name }}</p>
+              <p class="media-category">{{ item.actors.join(', ') }}</p>
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-item>
       <ion-item-options side="end">
-      
         <ion-item-option (click)="removeFromWatchlist(item)" color="pink" expandable>
           <ion-icon slot="icon-only" name="trash"></ion-icon>
         </ion-item-option>

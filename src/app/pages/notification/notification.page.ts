@@ -1,5 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Notification, Notifications } from 'src/app/custom/models/notification.modal';
+import { Videos } from 'src/app/custom/models/video.modal';
+import { ApiService } from 'src/app/custom/services/api.service';
 import { HelperService } from 'src/app/custom/services/helper.service';
 
 @Component({
@@ -9,39 +13,75 @@ import { HelperService } from 'src/app/custom/services/helper.service';
 })
 export class NotificationPage implements OnInit {
 
+  pagination: any = {
+    pageSize: 21,
+    p: 1,
+    total: 0
+  };
 
-  notifications = [
-    { title: 'New Episode: Breaking Bad', message: 'Season 5, Episode 3 is now available to watch!' },
-    { title: 'New Release: Stranger Things', message: 'The latest season just dropped! Check it out.' },
-    { title: 'Live Now: Music Concert', message: 'Join the live stream of the Music Concert now!' },
-    { title: 'Subscription Reminder', message: 'Your subscription is about to expire in 3 days.' },
-    { title: 'New Movie Available', message: 'The new action movie is now available for streaming!' },
-    { title: 'Trending Now: The Witcher', message: 'The Witcher is trending! Don\'t miss the latest episodes.' },
-    { title: 'Watch Party: Avengers Endgame', message: 'Join the watch party for Avengers: Endgame at 8 PM tonight.' },
-    { title: 'Exclusive Offer: 50% off Subscription', message: 'Subscribe now to get 50% off your first month of streaming.' },
-    { title: 'New Documentary: Ocean\'s Wonders', message: 'A new documentary on ocean life is now available to stream.' },
-    { title: 'Live Sports: Football Match', message: 'Catch the live football match between Team A and Team B!' },
-    { title: 'Exclusive Premiere: The Matrix Resurrections', message: 'The Matrix Resurrections is available for exclusive streaming!' },
-    { title: 'Season Finale: Game of Thrones', message: 'The season finale of Game of Thrones is available now!' },
-    { title: 'New TV Series: The Boys', message: 'Watch the new TV series "The Boys" now streaming!' },
-    { title: 'Reminder: Movie Night', message: 'Don\'t forget movie night with The Lion King at 7 PM!' },
-    { title: 'Live Stream: Cooking with Chef Ramsay', message: 'Join the live stream of Chef Ramsay\'s new recipe!' },
-  ];
+  notifications: Notifications = [];
+  isLoading: boolean = false; 
 
   constructor(
     public helper: HelperService,
+    public router: Router,
     private location: Location,
+    private api: ApiService,
   ) { }
 
   ngOnInit() {
-    this.notifications = this.helper.shuffleArray(this.notifications)
+    this.getNotificationPaginated();
+  }
+
+  getNotificationPaginated() {
+    if (this.isLoading) return;
+
+    this.isLoading = true;
+    const queryParams: any = {
+      page: this.pagination.p,
+      pageSize: this.pagination.pageSize,
+      user_id: 1, // changes are available
+    };
+
+    // Make the API call
+    this.api.getNotificationPaginated(queryParams).subscribe((response: any) => {
+      if (response.success) {
+        this.notifications = [...this.notifications, ...response.data];
+        this.pagination.total = response.total_records;
+      }
+      this.isLoading = false;
+    }, (error) => {
+      console.error('Error fetching videos:', error);
+      this.isLoading = false;
+    });
+  }
+
+  loadMoreVideos(event: any) {
+    if (this.isLoading) {
+      event.target.complete();
+      return;
+    }
+
+    if (this.notifications.length < this.pagination.total) {
+      this.pagination.p += 1;
+      this.getNotificationPaginated();
+      setTimeout(() => {
+        event.target.complete();
+      }, 1000);
+    } else {
+      event.target.disabled = true;
+    }
   }
 
   onSwipe(index: any) {
-    this.notifications.splice(index, 1);
   }
 
   goBack() {
     this.location.back();
+  }
+  clickTonotification(notification:any) {
+    console.log(notification.redirect_url);
+    
+    this.router.navigateByUrl(notification.redirect_url)
   }
 }

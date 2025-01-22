@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content color="grey">
-  <ion-grid>
+  <ion-grid *ngIf="allVideos && allVideos.length"> 
     <ion-row>
       <ng-container *ngFor="let item of allVideos">
         <ion-col size="4" (click)="clickOnPreviewClips({video_id:item.id})">
@@ -20,7 +20,7 @@
     </ion-row>
   </ion-grid>
 
-  <ion-infinite-scroll  threshold="100px" (ionInfinite)="loadMoreVideos($event)">
+  <ion-infinite-scroll *ngIf="allVideos && allVideos.length"  threshold="150px" (ionInfinite)="loadMoreVideos($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>

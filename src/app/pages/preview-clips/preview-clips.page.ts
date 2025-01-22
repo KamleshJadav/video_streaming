@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Video } from 'src/app/custom/models/video.modal';
 import { ApiService } from 'src/app/custom/services/api.service';
 import { CapacitorAdsService } from 'src/app/custom/services/capacitor-ads.service';
 import { customurl } from 'src/app/custom/services/customdata';
@@ -16,8 +17,8 @@ export class PreviewClipsPage implements OnInit {
   actorImageURl: string = this.api.assetsUrl + 'image/actor/'
   videoImageURl: string = this.api.assetsUrl + 'video_thmb/'
   videoData: any = {}
-  starCast: any = [ ]
-  seo_teg: any = [ ]
+  starCast: any = []
+  seo_teg: any = []
   showFullText: boolean = false;
 
   toggleText() {
@@ -119,16 +120,35 @@ export class PreviewClipsPage implements OnInit {
   }
 
   getVideoById() {
-    this.api.getVideoById(this.video_id).subscribe((response: any) => {
+    let body = {
+      video_id: this.video_id,
+      user_id: 1, // changes are available 
+    }
+    this.api.getVideoById(body).subscribe((response: any) => {
       if (response.success) {
         this.videoData = response.data;
-        
         this.starCast = this.videoData.actors;
         this.seo_teg = this.videoData.seo_teg;
-        console.log(this.seo_teg);
       }
     }, (error) => {
       console.error('Error fetching videos:', error);
     });
   }
+
+  toggleWishlist(video: Video) {
+    let body = {
+      video_id: this.video_id,
+      user_id: 1, // changes are available
+    }
+    this.api.wishListToggle(body).subscribe((response: any) => {
+      if (response.success) {
+          this.gs.showSuccess(response.message);
+          video.isInWishlist = response.isInWishlist
+      }
+    }, (error) => {
+      console.error('Error fetching videos:', error);
+    });
+  }
+
+  
 }
